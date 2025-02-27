@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import dbConnection from './dbConfig/dbconnection.js';                    
 
-
 const app = express();
 
 dotenv.config()
@@ -14,7 +13,8 @@ dotenv.config()
 app.use(express.json())
 app.use(cors());
 app.use('/auth',routes)
-    
+
+
 
 dbConnection()
 
