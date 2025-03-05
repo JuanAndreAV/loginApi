@@ -8,19 +8,19 @@ import { verifyEmailToken } from "../middlewares/authMiddleware.js";
 
 const registro = async (req, res)=>{
 try {
-    const {email, password, role} = req.body
+    const {name, email, password, role} = req.body
     let user = await User.findOne({email})
     if(user){
-        return res.status(400).json({message: "Email ya existe"})
+        return res.status(400).json({message: "Este email ya está registrado, favor inicia sesión"})
     }
     const salt = bcrypt.genSaltSync(10)
     const hash = bcrypt.hashSync(password, salt)
 
-    user = new User({email, password: hash, role: role || 'user'})
+    user = new User({name, email, password: hash, role: role || 'user'})
 
     await user.save()
 
-    res.status(201).json({message: "Usuario creado con exito"})
+    res.status(201).json({message: "Usuario creado con éxito!"})
 } catch (error) {
     res.status(error)
 }   
@@ -28,21 +28,22 @@ try {
 
 const login = async (req, res)=>{
     try {
-        const {email, password} = req.body
+        const { email, password} = req.body
         const user = await User.findOne({email})
         
         if(!user){
-            return res.status(400).json({message: "Email no existe"})
+            return res.status(400).json({message: "Este usuario no existe, favor registrarse"})
         };
-        console.log(user)
+        //console.log(user)
         const validPassword = bcrypt.compareSync(password, user.password)
         if(!validPassword){
             return res.status(400).json({message: "Contraseña incorrecta"})
         };
         
         const token = jwt.sign({id: user._id, role: user.role}, process.env.JWT_SECRET, {expiresIn: "1h"})
-        console.log(token)
-        res.json({token})
+        const { role, name} = user
+        //console.log(token)
+        res.json({ name, role, token})
         //res.json({message: "Login exitoso"})  
         
     } catch (error) {
@@ -60,7 +61,7 @@ const forgotPassword = async(req, res)=>{
         
         const token = jwt.sign({id: checkUser._id}, process.env.JWT_SECRET, {expiresIn:'15m'})
        
-        //await sendEmail(email, token);
+        await sendEmail(email, token);
         res.json({message: `Se ha enviado un correo para recuperar la contraseña. Token: ${token}`})
     } catch (error) {
         res.json(error)
@@ -82,7 +83,7 @@ const resetPassword = async (req, res) => {
     res.json({ message: "Contraseña actualizada con éxito" });
         
     } catch (error) {
-        console.error(error);
+        //console.error(error);
         return res.status(500).json({ message: "Error al actualizar la contraseña" });
     }
 
