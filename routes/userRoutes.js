@@ -12,7 +12,7 @@ router.get('/dashboard',verificarToken,(req, res)=>{
 });
 //recuperar contraseña
 router.post('/forgot-password', forgotPassword )
-router.post('/reset-password',verifyEmailToken, resetPassword)
+router.patch('/reset-password',verifyEmailToken, resetPassword)
     
 
 

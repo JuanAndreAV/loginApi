@@ -1,16 +1,19 @@
 import nodemailer from 'nodemailer'
 import { createTransport } from 'nodemailer'
+import  dotenv from 'dotenv'
+
+dotenv.config()
 
 const transporter = createTransport({
     service: 'gmail',
     auth: {
-        user: 'juanandres1029@gmail.com', //process.env.EMAIL_USER,
-        pass: 'vtnd yedf fkrh nidu' //process.env.EMAIL_PASS,
+        user: process.env.EMAIL_USER, //'juanandres1029@gmail.com', 
+        pass: process.env.EMAIL_PASS,
     }
 });
 
 const sendEmail = async (email, token) => {
-    const link = `http://localhost:3000/verify-email/?token=${token}`
+    const link = `${process.env.FRONTEND_ROUTE}/?token=${token}`
     const mailOptions = {
         from: '',
         to: email,

@@ -62,7 +62,7 @@ const forgotPassword = async(req, res)=>{
         const token = jwt.sign({id: checkUser._id}, process.env.JWT_SECRET, {expiresIn:'15m'})
        
         await sendEmail(email, token);
-        res.json({message: `Se ha enviado un correo para recuperar la contraseña. Token: ${token}`})
+        res.json({message: `Se ha enviado un enlace a ${email} para recuperar la contraseña.`})
     } catch (error) {
         res.json(error)
     }  
