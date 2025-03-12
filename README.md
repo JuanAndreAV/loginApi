@@ -24,12 +24,6 @@ Este proyecto implementa una API RESTful utilizando Node.js, Express, Nodemailer
 Antes de iniciar la aplicación, configura las variables de entorno creando un archivo `.env` en la raíz del proyecto con:
 
 ```
-PORT=3000
-MONGODB_URI=
-JWT_SECRET=
-EMAIL_SERVICE=servicio_de_email
-EMAIL_USER=tu_email
-EMAIL_PASS=tu_contraseña_de_email
 SERVER_PORT=3000
 URI=mongodb://localhost:27017/nombre_de_tu_base_de_datos
 JWT_SECRET=tu_secreto_jwt
