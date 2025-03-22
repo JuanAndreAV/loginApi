@@ -11,7 +11,7 @@ const transporter = createTransport({
         pass: process.env.EMAIL_PASS,
     }
 });
-
+//cambiar nombre archivo
 const sendEmail = async (email, token) => {
     const link = `${process.env.FRONTEND_ROUTE}/?token=${token}`
     const mailOptions = {
