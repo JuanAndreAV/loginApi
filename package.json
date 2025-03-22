@@ -9,9 +9,7 @@
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "keywords": [
-    ""
-  ],
+  "keywords": [],
   "author": "JuanitoCode",
   "license": "ISC",
   "dependencies": {

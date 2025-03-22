@@ -24,7 +24,7 @@ const verifyEmailToken = (req, res, next) => {
     try {
         
         const tokenWithoutBearer = token.startsWith("Bearer ") ? token.split(" ")[1] : token;
-        console.log("token: "+tokenWithoutBearer)
+        //console.log("token: "+tokenWithoutBearer)
         const verifyToken = jwt.verify(tokenWithoutBearer,process.env.JWT_SECRET);
         req.userId = verifyToken.id
         next()
