@@ -21,7 +21,7 @@ app.use('/api/products',productRoutes)
 dbConnection()
 
 
-
+//conexión
 app.listen(process.env.SERVER_PORT,'0.0.0.0',()=>{
     console.log(`servidor escuchando en el puerto ${process.env.SERVER_PORT} `)
 });
